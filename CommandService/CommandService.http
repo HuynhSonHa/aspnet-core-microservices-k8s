@@ -1,0 +1,40 @@
+@CommandService_HostAddress = http://localhost:5161
+
+# Local
+
+###
+Get http://localhost:5161/api/c/platform
+
+###
+POST http://localhost:5161/api/c/platform
+
+###
+GET http://localhost:5161/api/c/platforms/10/commands
+
+### 
+POST http://localhost:5161/api/c/platforms/10/commands
+Content-Type: application/json
+
+{
+    "howTo": "How to generate a migration",
+    "commandLine": "dotnet ef migrations add <Name of Migration>"
+}
+
+
+# Kubernetes
+
+###
+Get http://sonha2610.com:8080/api/c/platform
+
+
+###
+GET http://sonha2610.com:8080/api/c/platforms/6/commands
+
+### 
+POST http://sonha2610.com:8080/api/c/platforms/6/commands
+Content-Type: application/json
+
+{
+    "howTo": "How to generate a migration",
+    "commandLine": "dotnet ef migrations add <Name of Migration>"
+}

@@ -1,0 +1,66 @@
+@PlatformService_HostAddress = http://localhost:5031
+
+# Platform Service API Tests local
+###
+Get http://localhost:5031/api/platform
+
+
+###
+Post http://localhost:5031/api/platform
+Content-Type: application/json
+
+{
+    "name": "Dotnet Rocks",
+    "publisher": "Dotnet Rocks",
+    "cost": "Free"
+}
+
+
+
+# Platform Service API Tests docker
+###
+Get http://localhost:8080/api/platform
+
+
+
+# Platform Service API Tests kubernetes (NodePort)
+
+###
+Get http://localhost:32342/api/platform
+
+
+###
+Post http://localhost:32342/api/platform
+Content-Type: application/json
+
+{
+    "name": "Dotnet Rocks",
+    "publisher": "Dotnet Rocks",
+    "cost": "Free"
+}
+
+# Platform Service API Tests kubernetes (Nginx Ingress)
+
+###
+Get http://sonha2610.com:8080/api/platform
+
+
+# kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
+# lý do là http xài port 80 (port này bị IIS chiếm), còn https xài port 443, 
+# nên khi xài port-forward thì phải xài port 80 để forward vào nginx, 
+# nếu xài port 8080 thì sẽ bị lỗi vì nginx không lắng nghe trên port đó. Còn khi xài NodePort thì có thể xài bất kỳ port nào mà NodePort đã mở ra, ví dụ như 32342 trong trường hợp này.
+
+
+###
+Post http://sonha2610.com:8080/api/platform
+Content-Type: application/json
+
+{
+    "name": "Test K8S RabbitMQ",
+    "publisher": "Dotnet Rocks",
+    "cost": "Free"
+}
+
+
+###
+Get http://localhost:31148/api/platform

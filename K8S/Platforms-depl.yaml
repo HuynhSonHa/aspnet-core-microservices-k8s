@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platforms-depl
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platformservice
+  template:
+    metadata:
+      labels:
+        app: platformservice
+    spec:
+      containers:
+        - name: platformservice
+          image: sonha2610/platformservice:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: platforms-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: platformservice
+  ports:
+   - name: platformservice
+     protocol: TCP
+     port: 8080
+     targetPort: 8080
+   - name: platformsgrpc
+     protocol: TCP
+     port: 5001
+     targetPort: 5001
+
+
+# kubectl apply -f Platforms-depl.yaml
+
+
+# kubectl get deployments
+
+# kubectl get services
+
+# kubectl rollout restart deployment platforms-depl  (k8s restart deployment) 
